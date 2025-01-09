@@ -10,6 +10,15 @@ class NationalScreeningData {
     return NationalScreeningData(
         json['institution'], json['date'], json['type'], json['detail']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'institution': institution,
+      'date': date,
+      'type': type,
+      'detail': detail
+    };
+  }
 }
 
 class MedicalTreatmentDetail {
@@ -22,6 +31,10 @@ class MedicalTreatmentDetail {
   factory MedicalTreatmentDetail.fromJson(Map<String, dynamic> json) {
     return MedicalTreatmentDetail(
         json['date'], json['recipe'], json['quantity']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'date': date, 'recipe': recipe, 'quantity': quantity};
   }
 }
 
@@ -47,6 +60,17 @@ class MedicalTreatmentData {
             .map((detailJson) => MedicalTreatmentDetail.fromJson(detailJson))
             .toList());
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'institution': institution,
+      'date': date,
+      'type': type,
+      'detailType': detailType,
+      'location': location,
+      'detail': detail.map((d) => d.toJson()).toList()
+    };
+  }
 }
 
 class NHISScrapResult {
@@ -54,4 +78,12 @@ class NHISScrapResult {
   List<MedicalTreatmentData> medicalTreatmentDataList;
 
   NHISScrapResult(this.screeningDataList, this.medicalTreatmentDataList);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'screeningDataList': screeningDataList.map((s) => s.toJson()).toList(),
+      'medicalTreatmentDataList':
+          medicalTreatmentDataList.map((m) => m.toJson()).toList()
+    };
+  }
 }

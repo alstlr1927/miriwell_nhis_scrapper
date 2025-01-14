@@ -25,6 +25,8 @@ class MiriwellNHISScrapper {
 
   UserInfo _userInfo;
 
+  UserInfo get userInfo => _userInfo;
+
   NHISAuthType _authType;
 
   dynamic _authData;
